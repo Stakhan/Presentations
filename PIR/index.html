@@ -1,0 +1,242 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>PIR</title>
+
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/beige.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/monokai.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!-- Display video full-screen -->
+		    <script src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
+		    <script>
+
+		    // This function start playing the video with id from current slide,
+		    // toggles it to the FullScreen mode and fires the CancelFullScreen()
+		    // at the end of the video.
+		    function toggleFullScreen(id) {
+			var videoElement = document.getElementById(id);
+			$("#"+id).bind('ended', function(){ document.webkitCancelFullScreen(); });
+			videoElement.play();
+			videoElement.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
+		    }
+
+		    // This part is to add a listener for <Enter> key and to call toggleFullScreen()
+		    // function with the video ID that is dynamically obtained from the CURRENTLY displayed slide.
+		    document.addEventListener("keydown", function(e) {
+			if (e.keyCode == 13) {
+			    toggleFullScreen($('.present').find('video').attr('id'));
+			}
+		    }, false);
+
+		    </script>
+
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section >
+					<h3>Analyse semi-automatique de vidéos de séances d'apprentissage</h3>
+					<h4>Projet d'initiation à la recherche</h4>
+					<p>Younes Jallouf  |  Elie-Alban Lescout  |  Hugo Tardy</p>
+					<img data-src="images/logos/logo_line.jpg" />
+					<img data-src="images/logos/logo_ensg.png" />
+				</section>
+				<section>
+                                        	<h3>Plan</h3>
+						<ol class="fragment fade-up">
+						  <li>Contexte et objectif du projet</li>
+						  <li>Approches étudiées</li>
+						  <li>Mise en œuvre</li>
+							<li>Construction d'un jeu de données</li>
+						  <li>Perspectives et conclusion</li>
+						</ol>
+					</section>
+				<!-- ###INTRO###-->
+				<section>
+
+					<section>
+                                        	<h3>Contexte</h3>
+						<ul>
+						  <li>Comprendre le développement de la pensée informatique chez l'humain.</li>
+						  <li>Réalisation d'activités d'informatique débranchées</li>
+						</ul>
+						<img class="stretch" data-src="images/illu_manip_cubes.jpg" />
+						<small class="caption">[Some Text](http://a.link.com/whatever)</small>
+					</section>
+					<section>
+                              <h3>Objectif</h3>
+                            <p>Annoter les vidéos manuellement est chronophage...
+                            On cherche donc à <strong>automatiser le processus</strong>.</p>
+
+													<img class="stretch" data-src="images/interface_creacube.jpg" />
+													<small class="caption">Interface Creacube (Illustration du LINE)</small>
+        	</section>
+					<section>
+                                                <h3>Objectif</h3>
+																									<pre><code data-trim data-noescape>
+																								{
+																									...
+																									"6": {
+																										"start": "123.755",
+																										"end": "125.013",
+																										"label": "F07"
+																										},
+																									"7": {
+																										"start": "128.926",
+																										"end": "129.988",
+																										"label": "F01"
+																										},
+
+																									...
+																								}
+
+																									</code></pre>
+																									<small class="caption">Exemple de fichier JSON obtenu à partir des sous-titres</small>
+
+                                        </section>
+
+				</section>
+				<!-- ###MODELISATION###-->
+				<section>
+					<section>
+                                                <h1>Modélisation</h1>
+                                        </section>
+					<section>
+                                                <h3>Diagramme de classe global</h3>
+						<img class="stretch" data-src="images/diagrams/ClassDiagram.svg" />
+					</section>
+					<section>
+                                                <h3>Structure des routes</h3>
+                                        	<img class="stretch" data-src="images/gifs/map.png" />
+					</section>
+					<section>
+                                                <h3>Fonctionnement des feux</h3>
+                                                <img class="stretch" data-src="images/gifs/fast-light.gif" />
+                                        </section>
+
+					<section>
+                                                <h3>Diagramme d'activité des voitures</h3>
+						<img class="stretch" data-src="images/diagrams/ActivityDiagram_Car.svg" alt="" />
+                                        </section>
+					<section>
+                                                <h3>Circulation d'une voiture</h3>
+                                                <img class="stretch" data-src="images/gifs/one-car-vision.gif" alt="" />
+                                        </section>
+					<section>
+                                                <h3>Diagramme d'activité des piétons</h3>
+						<img class="stretch" data-src="images/diagrams/ActivityDiagram_Pedestrian.svg" />
+					</section>
+					<section>
+                                                <h3>Circulation d'un piéton</h3>
+                                                <img class="stretch" data-src="images/gifs/one-ped.gif" />
+                                        </section>
+				</section>
+				<!-- ###DEMONSTRATION###-->
+				<section>
+					<section>
+						<h1>Démonstration</h1>
+					</section>
+					<section>
+                                                <h2>Fenêtre de configuration</h2>
+						<video id="myvideo" src="videos/StructWindow.mp4" type="video/mp4" style="heigth: 70%; width: 70%;" />
+                                        </section>
+					<section>
+                                                <h2>Fenêtre principale</h2>
+                                                <video id="myvideo" src="videos/Window.mp4" type="video/mp4" style="heigth: 70%; width: 70%;" />
+                                        </section>
+
+				</section>
+				<!-- ###DEVELOPPEMENT###-->
+				<section>
+					<section>
+						<h1>Développement</h1>
+					</section>
+					<section>
+                                                <h2>Répartition des tâches</h2>
+						<img class="stretch" data-src="images/images-dev/repartition.png" />
+        	                        </section>
+					<section>
+						<h2>Usage de github</h2>
+						<img class="stretch" data-src="images/images-dev/git-commit-tree.png" />
+                                        </section>
+					<section>
+                                                <h2>Difficultés rencontrées</h2>
+						<ul class="fragment fade-up">
+							<li>Merge parfois très compliqués dans github lorsqu'on a travaillé sur les même fichiers</li>
+						  <li>Problèmes de conventions de coordonnées</li>
+						  <li>Problème de shallow-copy/deep-copy d'un tableau d'objets</li>
+                                                </ul>
+                                        </section>
+					<section>
+                                                <h2>Perspectives</h2>
+						<ul class="fragment fade-up">
+                                                   <li>Optimisation de la mémoire</li>
+                                                   <li>Meilleure exhaustivité statistique</li>
+                                                </ul>
+
+                                        </section>
+
+
+				</section>
+				<!-- ###CONCLUSION###-->
+				<section>
+                                        <h1>Conclusion</h1>
+					<h3 class="fragment fade-up">Bilans personnels</h3>
+					<h3 class="fragment fade-up">Bilan collectif</h3>
+                                </section>
+
+			</div>
+		</div>
+
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+
+				    // The "normal" size of the presentation, aspect ratio will be preserved
+				    // when the presentation is scaled to fit different resolutions. Can be
+				    // specified using percentage units.
+				    width: 960,
+				    height: 700,
+
+				controls: true,  // Display controls in the bottom right corner
+				progress: true,  // Display a presentation progress bar
+				history: true,   // Push each slide change to the browser history
+				center: true,    // Vertical centering of slides
+
+				slideNumber: true, // Display the page number of the current slide
+				//autoSlide: 5000, // Slide every duration milliseconds
+
+				transition: 'convex', // none/fade/slide/convex/concave/zoom
+
+
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true }
+				]
+
+			});
+		</script>
+	</body>
+</html>
